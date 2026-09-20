@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+/* Dark mode is driven by a class on <html>, set by the theme toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/*
+ * Diagram palette. Every node colour role resolves to three variables:
+ * a fill, a border and a text colour. Both themes define all three, so a
+ * diagram never has to know which theme it is rendering in.
+ */
+:root {
+  --page: #ffffff;
+  --page-soft: #f8fafc;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --ink-faint: #64748b;
+  --rule: #e2e8f0;
+  --rule-strong: #cbd5e1;
+
+  --edge: #94a3b8;
+  --edge-loop: #dc2626;
+  --edge-ok: #16a34a;
+
+  --role-grey-fill: #f1f5f9;
+  --role-grey-line: #94a3b8;
+  --role-grey-ink: #334155;
+
+  --role-amber-fill: #fef3c7;
+  --role-amber-line: #d97706;
+  --role-amber-ink: #78350f;
+
+  --role-blue-fill: #dbeafe;
+  --role-blue-line: #2563eb;
+  --role-blue-ink: #1e3a8a;
+
+  --role-purple-fill: #ede9fe;
+  --role-purple-line: #7c3aed;
+  --role-purple-ink: #4c1d95;
+
+  --role-green-fill: #dcfce7;
+  --role-green-line: #16a34a;
+  --role-green-ink: #14532d;
+
+  --role-red-fill: #fee2e2;
+  --role-red-line: #dc2626;
+  --role-red-ink: #7f1d1d;
+}
+
+.dark {
+  --page: #0b1120;
+  --page-soft: #111827;
+  --ink: #e2e8f0;
+  --ink-soft: #cbd5e1;
+  --ink-faint: #94a3b8;
+  --rule: #1e293b;
+  --rule-strong: #334155;
+
+  --edge: #64748b;
+  --edge-loop: #f87171;
+  --edge-ok: #4ade80;
+
+  --role-grey-fill: #1e293b;
+  --role-grey-line: #64748b;
+  --role-grey-ink: #e2e8f0;
+
+  --role-amber-fill: #422006;
+  --role-amber-line: #f59e0b;
+  --role-amber-ink: #fde68a;
+
+  --role-blue-fill: #17275a;
+  --role-blue-line: #60a5fa;
+  --role-blue-ink: #dbeafe;
+
+  --role-purple-fill: #2e1065;
+  --role-purple-line: #a78bfa;
+  --role-purple-ink: #ede9fe;
+
+  --role-green-fill: #052e16;
+  --role-green-line: #4ade80;
+  --role-green-ink: #dcfce7;
+
+  --role-red-fill: #450a0a;
+  --role-red-line: #f87171;
+  --role-red-ink: #fecaca;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Headings are deep-linked; keep them clear of the sticky header. */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Loop-backs march slowly, so a reader's eye follows them the right way round. */
+.flow-loop {
+  animation: flow-march 1.4s linear infinite;
+}
+
+@keyframes flow-march {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-loop {
+    animation: none;
+  }
+}
