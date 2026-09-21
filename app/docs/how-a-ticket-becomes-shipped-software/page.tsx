@@ -52,8 +52,8 @@ const toc: TocEntry[] = [
     label: 'How a phase is tracked',
   },
   { id: 'what-this-buys', label: 'What this buys' },
-  { id: 'gaps', label: 'Known Gaps', tone: 'warn' },
   { id: 'why-it-is-shaped-this-way', label: 'Why it is shaped this way' },
+  { id: 'gaps', label: 'Known Gaps', tone: 'warn' },
   { id: 'tooling', label: 'The tooling' },
 ];
 
@@ -310,6 +310,11 @@ export default function Page() {
             <Strong>Fix and re-review</Strong> — apply its findings, run it again.
           </Item>
           <Item>
+            <Strong>CI review</Strong> — <A href="https://www.greptile.com">Greptile</A> reviews the
+            pull request on GitHub and comments inline. A second opinion, outside the session that
+            wrote the code.
+          </Item>
+          <Item>
             <Strong>Request human review</Strong> — posted to Slack through the internal{' '}
             <Cli name="slack" />; the thread stays linked to the PR.
           </Item>
@@ -386,31 +391,6 @@ export default function Page() {
         </P>
       </Section>
 
-      <Section id="gaps" title="Known Gaps" tone="warn">
-        <P>What the workflow does not do yet:</P>
-        <List>
-          <Item>
-            <Strong>Tests follow the code</Strong> — the plan names the tests each step needs, and
-            verification runs them, but they are written alongside the change. Test-driven would
-            write them first and let them drive the implementation.
-          </Item>
-          <Item>
-            <Strong>Documentation is never updated</Strong> — no step creates or updates
-            documentation once a change lands, so the next ticket starts colder than it needs to.
-          </Item>
-          <Item>
-            <Strong>The research document decays</Strong> — it describes the system as it was before
-            the change. Nothing refreshes it after the merge, so the next reader inherits a
-            description that is one ticket out of date.
-          </Item>
-          <Item>
-            <Strong>Nothing checks the outcome</Strong> — the context document records the customer
-            problem and the assumptions taken on trust. Neither is revisited once the change is
-            live, so a wrong assumption is never formally caught.
-          </Item>
-        </List>
-      </Section>
-
       <Section id="why-it-is-shaped-this-way" title="Why it is shaped this way">
         <P>
           Most of the cost of software is not typing the code. It is building the wrong thing, or
@@ -444,6 +424,31 @@ export default function Page() {
         */}
       </Section>
 
+      <Section id="gaps" title="Known Gaps" tone="warn">
+        <P>What the workflow does not do yet:</P>
+        <List>
+          <Item>
+            <Strong>Tests follow the code</Strong> — the plan names the tests each step needs, and
+            verification runs them, but they are written alongside the change. Test-driven would
+            write them first and let them drive the implementation.
+          </Item>
+          <Item>
+            <Strong>Documentation is never updated</Strong> — no step creates or updates
+            documentation once a change lands, so the next ticket starts colder than it needs to.
+          </Item>
+          <Item>
+            <Strong>The research document decays</Strong> — it describes the system as it was before
+            the change. Nothing refreshes it after the merge, so the next reader inherits a
+            description that is one ticket out of date.
+          </Item>
+          <Item>
+            <Strong>Nothing checks the outcome</Strong> — the context document records the customer
+            problem and the assumptions taken on trust. Neither is revisited once the change is
+            live, so a wrong assumption is never formally caught.
+          </Item>
+        </List>
+      </Section>
+
       <Section id="tooling" title="The tooling">
         <P>
           The workflow is a <A href="https://github.com/Jassu225/ks">Claude Code plugin</A>. The
@@ -465,6 +470,10 @@ export default function Page() {
           <Item>
             <A href="https://github.com">GitHub</A> — the repository, the branch and the pull
             request.
+          </Item>
+          <Item>
+            <A href="https://www.greptile.com">Greptile</A> — automated pull request review in CI,
+            commenting on the diff in GitHub.
           </Item>
           <Item>
             <A href="https://claude.com/claude-code">Claude Code</A> — runs every phase.
